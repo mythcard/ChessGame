@@ -17,19 +17,20 @@ public class Soldier extends Piece {
     }
 
     @Override
-    public boolean isMoveValid(Position from, Position to) {
+    public boolean isMoveValid(Position from, Position to, String color) {
         Position currentPosition = this.getPos();
-        if(isMovePossible(currentPosition, to)){
+        if(isMovePossible(currentPosition, to, color)){
             return true;
         }
         return false;
     }
 
-    public boolean isMovePossible(Position currentPos, Position to){
+    public boolean isMovePossible(Position currentPos, Position to, String color){
 
         // find the list of valid positions, basically 1 forward, left alternate and right alternate based on color
         // check if to exists from the set
         // constraint checking (if a check is placed, if there is a piece in between rest of the path gets blocked)
         return true;
     }
+
 }

@@ -17,7 +17,7 @@ public class Knight extends Piece {
     }
 
     @Override
-    public boolean isMoveValid(Position from, Position to) {
-        return super.isMoveValid(from, to);
+    public boolean isMoveValid(Position from, Position to, String color) {
+        return super.isMoveValid(from, to, color);
     }
 }

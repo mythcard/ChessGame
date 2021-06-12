@@ -35,7 +35,7 @@ public abstract class Piece {
         this.specificpieceDetail = specificpieceDetail;
     }
 
-    public boolean isMoveValid(Position from, Position to){
+    public boolean isMoveValid(Position from, Position to, String color){
         return false;
     }
 }
