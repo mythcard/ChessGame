@@ -34,6 +34,8 @@ public class MessageController {
 
     @PostMapping("/move")
     Map<String, Position> echo (@RequestBody MakeMoveRequestBody reqBody){
+        System.out.println("In message controller: ");
+        System.out.println(reqBody.toString());
         return g1.makeMove(reqBody);
     }
 

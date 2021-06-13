@@ -112,6 +112,12 @@ public class Board {
         // to do
         // //check for out of bounds for to position
         // switch statement to recognise the piece and validate if its active,
+
+        System.out.println("In board: ");
+        System.out.println("Specific detail: "+ specificPieceDetail);
+        System.out.println("Position from: "+ from.toString());
+        System.out.println("Position to: "+ to.toString());
+
         String whatPiece = recognisePiece(specificPieceDetail);
         Piece soldier = null;
 
@@ -122,9 +128,9 @@ public class Board {
                 else
                     soldier = getRightSoldier(this.blackSoldiers, specificPieceDetail);
                 if(soldier.isMoveValid(from, to, color)){
-                    System.out.println("Specific Piece detail: "+ soldier.getSpecificpieceDetail());
+                    soldier.setPos(to);
+                    boardState.put(specificPieceDetail,soldier.getPos());
                 }
-
 
         }
         // check if the move is valid
@@ -149,14 +155,22 @@ public class Board {
     private static Piece getRightSoldier(List<Piece> whiteOrBlackSolLst, String specificPieceDetail){
         String res = null;
         String[] lst = specificPieceDetail.split("_");
-//        for(String itm: lst){
-//            res = itm;
-//        }
+        for(String itm: lst){
+            res = itm;
+        }
 
-        Piece pc = whiteOrBlackSolLst.get(lst.length - 1);
+        Piece pc = whiteOrBlackSolLst.get(Integer.parseInt(res));
 
         return pc;
 
     }
+
+//    public static void main(String[] args) {
+//        Board b1 = new Board();
+//        Map<String, Position> bdState =
+//        b1.makeMove("white_Soldier_0",new Position(1,0),new Position(2,1), "white");
+//
+//        System.out.println("Final board state: "+ bdState.toString());
+//    }
 
 }

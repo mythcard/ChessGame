@@ -14,6 +14,8 @@ public class Game {
     }
 
     public Map<String,Position> makeMove(MakeMoveRequestBody reqBody){
+        System.out.println("In Game: ");
+        System.out.println(reqBody.toString());
         return board.makeMove(reqBody.getSpecificPieceDetail(),reqBody.getFrom(), reqBody.getTo(), reqBody.getColor());
     }
 

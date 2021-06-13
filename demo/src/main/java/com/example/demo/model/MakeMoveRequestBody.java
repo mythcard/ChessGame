@@ -44,4 +44,14 @@ public class MakeMoveRequestBody {
     public void setColor(String color) {
         this.color = color;
     }
+
+    @Override
+    public String toString() {
+        return "MakeMoveRequestBody{" +
+                "specificPieceDetail='" + specificPieceDetail + '\'' +
+                ", from=" + from +
+                ", to=" + to +
+                ", color='" + color + '\'' +
+                '}';
+    }
 }
