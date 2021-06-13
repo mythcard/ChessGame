@@ -18,6 +18,8 @@ public class Rook extends Piece {
 
     @Override
     public boolean isMoveValid(Position from, Position to, String color) {
-        return super.isMoveValid(from, to, color);
+        //Check for whether from and to position's row or column values are equal to simulate rook unconstrained movement
+        return (from.hor == to.hor) ^ (from.vert == to.vert);
+//        return super.isMoveValid(from, to, color);
     }
 }

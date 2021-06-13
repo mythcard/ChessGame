@@ -120,6 +120,7 @@ public class Board {
 
         String whatPiece = recognisePiece(specificPieceDetail);
         Piece soldier = null;
+        Piece rook = null; //Why not use 1 var for both rook and sol?
 
         switch(whatPiece){
             case "Soldier":
@@ -131,8 +132,15 @@ public class Board {
                     soldier.setPos(to);
                     boardState.put(specificPieceDetail,soldier.getPos());
                 }
+            case "rook":
+                rook = getRightRook(specificPieceDetail,color);
+                if(rook.isMoveValid(from,to,color)){
+                    rook.setPos(to);
+                    boardState.put(specificPieceDetail,rook.getPos());
+                }
 
         }
+        //TODO: From Position and Current Position validation
         // check if the move is valid
         // check if the position is occupied by another piece
         // if the move is valid and if the another piece from another color is occupying that position
@@ -165,12 +173,172 @@ public class Board {
 
     }
 
+    private Piece getRightRook(String specificPieceDetail,String color){
+        String[] lst = specificPieceDetail.split("_");
+        Piece pc = null;
+        switch(lst[0]){
+            case "king":
+                return (color.equals("white") ? this.getKingSideWhiteRook() : this.getKingSideBlackRook());
+            case "queen":
+                return(color.equals("white") ? this.getQueenSideWhiteRook() : this.getQueenSideBlackRook());
+        }
+        return null;
+        //break? needed or not
+    }
+
+    public void setBoardState(Map<String, Position> boardState) {
+        this.boardState = boardState;
+    }
+
+    public Piece getWhiteKing() {
+        return whiteKing;
+    }
+
+    public void setWhiteKing(Piece whiteKing) {
+        this.whiteKing = whiteKing;
+    }
+
+    public Piece getBlackKing() {
+        return blackKing;
+    }
+
+    public void setBlackKing(Piece blackKing) {
+        this.blackKing = blackKing;
+    }
+
+    public Piece getWhiteQueen() {
+        return whiteQueen;
+    }
+
+    public void setWhiteQueen(Piece whiteQueen) {
+        this.whiteQueen = whiteQueen;
+    }
+
+    public Piece getBlackQueen() {
+        return blackQueen;
+    }
+
+    public void setBlackQueen(Piece blackQueen) {
+        this.blackQueen = blackQueen;
+    }
+
+    public Piece getKingSideWhiteRook() {
+        return kingSideWhiteRook;
+    }
+
+    public void setKingSideWhiteRook(Piece kingSideWhiteRook) {
+        this.kingSideWhiteRook = kingSideWhiteRook;
+    }
+
+    public Piece getQueenSideWhiteRook() {
+        return queenSideWhiteRook;
+    }
+
+    public void setQueenSideWhiteRook(Piece queenSideWhiteRook) {
+        this.queenSideWhiteRook = queenSideWhiteRook;
+    }
+
+    public Piece getKingSideBlackRook() {
+        return kingSideBlackRook;
+    }
+
+    public void setKingSideBlackRook(Piece kingSideBlackRook) {
+        this.kingSideBlackRook = kingSideBlackRook;
+    }
+
+    public Piece getQueenSideBlackRook() {
+        return queenSideBlackRook;
+    }
+
+    public void setQueenSideBlackRook(Piece queenSideBlackRook) {
+        this.queenSideBlackRook = queenSideBlackRook;
+    }
+
+    public Piece getKingSideWhiteBishop() {
+        return kingSideWhiteBishop;
+    }
+
+    public void setKingSideWhiteBishop(Piece kingSideWhiteBishop) {
+        this.kingSideWhiteBishop = kingSideWhiteBishop;
+    }
+
+    public Piece getQueenSideWhiteBishop() {
+        return queenSideWhiteBishop;
+    }
+
+    public void setQueenSideWhiteBishop(Piece queenSideWhiteBishop) {
+        this.queenSideWhiteBishop = queenSideWhiteBishop;
+    }
+
+    public Piece getKingSideBlackBishop() {
+        return kingSideBlackBishop;
+    }
+
+    public void setKingSideBlackBishop(Piece kingSideBlackBishop) {
+        this.kingSideBlackBishop = kingSideBlackBishop;
+    }
+
+    public Piece getQueenSideBlackBishop() {
+        return queenSideBlackBishop;
+    }
+
+    public void setQueenSideBlackBishop(Piece queenSideBlackBishop) {
+        this.queenSideBlackBishop = queenSideBlackBishop;
+    }
+
+    public Piece getKingSideWhiteKnight() {
+        return kingSideWhiteKnight;
+    }
+
+    public void setKingSideWhiteKnight(Piece kingSideWhiteKnight) {
+        this.kingSideWhiteKnight = kingSideWhiteKnight;
+    }
+
+    public Piece getQueenSideWhiteKnight() {
+        return queenSideWhiteKnight;
+    }
+
+    public void setQueenSideWhiteKnight(Piece queenSideWhiteKnight) {
+        this.queenSideWhiteKnight = queenSideWhiteKnight;
+    }
+
+    public Piece getKingSideBlackKnight() {
+        return kingSideBlackKnight;
+    }
+
+    public void setKingSideBlackKnight(Piece kingSideBlackKnight) {
+        this.kingSideBlackKnight = kingSideBlackKnight;
+    }
+
+    public Piece getQueenSideBlackKnight() {
+        return queenSideBlackKnight;
+    }
+
+    public void setQueenSideBlackKnight(Piece queenSideBlackKnight) {
+        this.queenSideBlackKnight = queenSideBlackKnight;
+    }
+
+    public List<Piece> getWhiteSoldiers() {
+        return whiteSoldiers;
+    }
+
+    public void setWhiteSoldiers(List<Piece> whiteSoldiers) {
+        this.whiteSoldiers = whiteSoldiers;
+    }
+
+    public List<Piece> getBlackSoldiers() {
+        return blackSoldiers;
+    }
+
+    public void setBlackSoldiers(List<Piece> blackSoldiers) {
+        this.blackSoldiers = blackSoldiers;
+    }
+
 //    public static void main(String[] args) {
 //        Board b1 = new Board();
 //        Map<String, Position> bdState =
 //        b1.makeMove("white_Soldier_0",new Position(1,0),new Position(2,1), "white");
-//
+//        b1.makeMove("king_side_black_rook",new Position(7,0),new Position(4,0),"white");
 //        System.out.println("Final board state: "+ bdState.toString());
 //    }
-
 }
