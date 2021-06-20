@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.example.demo.utility.HorizontalMovement;
+
 public class Rook extends Piece {
     boolean isActive;
 
@@ -19,7 +21,6 @@ public class Rook extends Piece {
     @Override
     public boolean isMoveValid(Position from, Position to, String color) {
         //Check for whether from and to position's row or column values are equal to simulate rook unconstrained movement
-        return (from.hor == to.hor) ^ (from.vert == to.vert);
-//        return super.isMoveValid(from, to, color);
+        return HorizontalMovement.isHorizontalMoveValid(from,to);
     }
 }

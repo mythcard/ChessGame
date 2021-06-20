@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.example.demo.utility.DiagonalMovement;
+
 public class Bishop extends Piece {
     boolean isActive;
 
@@ -18,6 +20,8 @@ public class Bishop extends Piece {
 
     @Override
     public boolean isMoveValid(Position from, Position to, String color) {
-        return super.isMoveValid(from, to, color);
+        //Bishop travels in 45 or 135 therefore slope which is tan(angle) is +-1
+        //Slope is (y2-y1)/(x2-x1)
+        return DiagonalMovement.isDiagonalMoveValid(from,to);
     }
 }

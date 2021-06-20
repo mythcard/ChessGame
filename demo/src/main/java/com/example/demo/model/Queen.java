@@ -1,5 +1,8 @@
 package com.example.demo.model;
 
+import com.example.demo.utility.DiagonalMovement;
+import com.example.demo.utility.HorizontalMovement;
+
 public class Queen extends Piece {
     boolean isActive;
 
@@ -18,6 +21,6 @@ public class Queen extends Piece {
 
     @Override
     public boolean isMoveValid(Position from, Position to, String color) {
-        return super.isMoveValid(from, to, color);
+        return (HorizontalMovement.isHorizontalMoveValid(from, to) ^ DiagonalMovement.isDiagonalMoveValid(from, to));
     }
 }

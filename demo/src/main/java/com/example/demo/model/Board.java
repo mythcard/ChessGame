@@ -120,7 +120,10 @@ public class Board {
 
         String whatPiece = recognisePiece(specificPieceDetail);
         Piece soldier = null;
-        Piece rook = null; //Why not use 1 var for both rook and sol?
+        Piece rook = null; //Why not use 1 var for all?
+        Piece bishop = null;
+        Piece knight = null;
+        Piece queen = null;
 
         switch(whatPiece){
             case "Soldier":
@@ -138,7 +141,25 @@ public class Board {
                     rook.setPos(to);
                     boardState.put(specificPieceDetail,rook.getPos());
                 }
+            case "bishop":
+                bishop = getRightBishop(specificPieceDetail,color);
+                if(bishop.isMoveValid(from,to,color)){
+                    bishop.setPos(to);
+                    boardState.put(specificPieceDetail, bishop.getPos());
+            }
+            case "knight":
+                knight = getRightKnight(specificPieceDetail,color);
+                if(knight.isMoveValid(from,to,color)){
+                    knight.setPos(to);
+                    boardState.put(specificPieceDetail,knight.getPos());
+                }
 
+            case "queen":
+                queen = getRightQueen(color);
+                if(queen.isMoveValid(from,to,color)){
+                    queen.setPos(to);
+                    boardState.put(specificPieceDetail,queen.getPos());
+                }
         }
         //TODO: From Position and Current Position validation
         // check if the move is valid
@@ -175,15 +196,26 @@ public class Board {
 
     private Piece getRightRook(String specificPieceDetail,String color){
         String[] lst = specificPieceDetail.split("_");
-        Piece pc = null;
-        switch(lst[0]){
-            case "king":
-                return (color.equals("white") ? this.getKingSideWhiteRook() : this.getKingSideBlackRook());
-            case "queen":
-                return(color.equals("white") ? this.getQueenSideWhiteRook() : this.getQueenSideBlackRook());
-        }
-        return null;
-        //break? needed or not
+        if(lst[0].equals("king"))return (color.equals("white")) ? this.getKingSideWhiteRook() : this.getKingSideBlackRook();
+        return (color.equals("queen") ? this.getQueenSideWhiteRook() : this.getQueenSideBlackRook());
+    }
+
+    private Piece getRightBishop(String specificPieceDetail, String color){
+        String[] lst = specificPieceDetail.split("_");
+        if(lst[0].equals("king"))return (color.equals("white") ? this.getKingSideWhiteBishop() : this.getKingSideBlackBishop());
+        //Return this when queen is included
+        return (color.equals("queen") ? this.getQueenSideWhiteBishop() : this.getQueenSideBlackBishop());
+    }
+
+    private Piece getRightKnight(String specificPieceDetail , String color){
+        String[] lst = specificPieceDetail.split("_");
+        if(lst[0].equals("king"))return (color.equals("white")) ? this.getKingSideWhiteKnight() : this.getKingSideBlackKnight();
+        return (color.equals("queen") ? this.getQueenSideWhiteKnight() : this.getQueenSideBlackKnight());
+    }
+
+    private Piece getRightQueen(String color){
+        if(color.equals("white"))return this.getWhiteQueen();
+        return this.getBlackQueen();
     }
 
     public void setBoardState(Map<String, Position> boardState) {
@@ -339,6 +371,8 @@ public class Board {
 //        Map<String, Position> bdState =
 //        b1.makeMove("white_Soldier_0",new Position(1,0),new Position(2,1), "white");
 //        b1.makeMove("king_side_black_rook",new Position(7,0),new Position(4,0),"white");
+//        b1.makeMove("black_queen",new Position(7,4),new Position(7,6),"white");
+//        b1.makeMove("king_side_black_bishop",new Position(()))
 //        System.out.println("Final board state: "+ bdState.toString());
 //    }
 }
